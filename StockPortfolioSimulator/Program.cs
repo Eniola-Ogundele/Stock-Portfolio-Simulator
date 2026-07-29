@@ -29,14 +29,18 @@ httpClient.DefaultRequestHeaders.Add(
     "X-Finnhub-Token",
     options.ApiKey);
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Choose which market price provider the application should use.
+//
 // We do not have a DI container yet, so we create and connect
 // the application's dependencies manually.
+//
+// FinnhubMarketPriceProvider retrieves a real price from the internet.
 IMarketPriceProvider marketPriceProvider = new FinnhubMarketPriceProvider(httpClient);
 
-// We could also use the FakeMarketPriceProvider for local testing instead of the real Finnhub provider.
-// Returning 100 as a fake price for every asset.
+// FakeMarketPriceProvider can be used instead when testing.
+// It returns the predictable price 100m without making an API request.
 // IMarketPriceProvider marketPriceProvider = new FakeMarketPriceProvider();
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 Console.WriteLine("Stock Portfolio Simulator");
@@ -44,6 +48,6 @@ Console.WriteLine("Stock Portfolio Simulator");
 
 var apple = new Asset("AAPL", "Apple"); // Asset to retrieve a price for
 
-// Ask the real Finnhub provider for Apple's current market price.
+// Ask the selected market price provider for Apple's price.
 decimal price = await marketPriceProvider.GetCurrentPrice(apple);
 Console.WriteLine($"Current price of {apple}: ${price}");
