@@ -1,7 +1,7 @@
 ﻿/*
  * Stock-Portfolio-Simulator
  * Copyright (c) 2026 Kyle Givler
- * Licensed not yet decided
+ * License not yet decided
  */
 
 // API documentation: https://finnhub.io/docs/api

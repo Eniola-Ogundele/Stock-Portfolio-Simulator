@@ -1,7 +1,7 @@
 ﻿/*
  * Stock-Portfolio-Simulator
  * Copyright (c) 2026 Kyle Giver
- * Licensed not yet decided
+ * License not yet decided
  */
 
 using StockPortfolioSimulator.MarketData;

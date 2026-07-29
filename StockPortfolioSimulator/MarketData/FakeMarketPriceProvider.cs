@@ -1,7 +1,7 @@
 ﻿/*
  * Stock-Portfolio-Simulator
  * Copyright (c) 2026 Eniola Ogundele
- * Licensed not yet decided
+ * License not yet decided
  */
 
 using StockPortfolioSimulator.Models;
