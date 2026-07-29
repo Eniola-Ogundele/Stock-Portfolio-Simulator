@@ -1,4 +1,10 @@
-﻿// API documentation: https://finnhub.io/docs/api
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Kyle Givler
+ * Licensed not yet decided
+ */
+
+// API documentation: https://finnhub.io/docs/api
 // Quote endpoint: https://finnhub.io/docs/api/quote
 //
 // Example response:

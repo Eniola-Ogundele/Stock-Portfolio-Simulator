@@ -1,4 +1,10 @@
-﻿// Note: IOptions<FinnhubOptions> has not been wired up yet.
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Kyle Givler
+ * Licensed not yet decided
+ */
+
+// Note: IOptions<FinnhubOptions> has not been wired up yet.
 
 namespace StockPortfolioSimulator.MarketData.Finnhub;
 

@@ -1,4 +1,11 @@
-﻿using StockPortfolioSimulator.Models;
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Kyle Giver
+ * Licensed not yet decided
+ */
+
+
+using StockPortfolioSimulator.Models;
 
 namespace StockPortfolioSimulator.tests.Models;
 
