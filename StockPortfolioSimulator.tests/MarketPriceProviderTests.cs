@@ -6,14 +6,14 @@ namespace StockPortfolioSimulator.Tests.MarketData;
 public class FakeMarketPriceProviderTests
 {
     [Fact]
-    public void GetCurrentPrice_ReturnsOneHundred()
+    public async Task GetCurrentPrice_ReturnsOneHundred()
     {
         // Arrange
         var provider = new FakeMarketPriceProvider();
         var asset = new Asset("MSFT", "Microsoft");
 
         // Act
-        decimal price = provider.GetCurrentPrice(asset);
+        decimal price = await provider.GetCurrentPrice(asset);
 
         // Assert
         // FakeMarketPriceProvider always returns 100 for all assets
