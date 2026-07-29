@@ -1,5 +1,9 @@
-﻿namespace StockPortfolioSimulator.MarketData;
-public class FakeMarketPriceProvide : IMarketPriceProvider 
+﻿using StockPortfolioSimulator.Models;
+namespace StockPortfolioSimulator.MarketData;
+public class FakeMarketPriceProvider : IMarketPriceProvider
 {
-     //incomplete
+    public decimal GetCurrentPrice(Asset asset)
+    {
+        return 100m;
+    }
 }
