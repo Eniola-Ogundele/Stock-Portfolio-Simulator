@@ -7,7 +7,7 @@
 using StockPortfolioSimulator.MarketData;
 using StockPortfolioSimulator.Models;
 
-namespace StockPortfolioSimulator.Tests.MarketData;
+namespace StockPortfolioSimulator.Tests;
 
 public class FakeMarketPriceProviderTests
 {

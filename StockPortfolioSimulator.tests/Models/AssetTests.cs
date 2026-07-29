@@ -7,7 +7,7 @@
 
 using StockPortfolioSimulator.Models;
 
-namespace StockPortfolioSimulator.tests.Models;
+namespace StockPortfolioSimulator.Tests.Models;
 
 public class AssetTests
 {
