@@ -1,8 +1,8 @@
 namespace StockPortfolioSimulator.Models;
 public class Asset
 {
-	public String Symbol { get; set; }
-	public String Name { get; set; }
+	public string Symbol { get; }
+	public string Name { get; }
 
 	public Asset(string symbol, string name)
 	{
