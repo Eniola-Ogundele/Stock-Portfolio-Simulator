@@ -33,6 +33,10 @@ httpClient.DefaultRequestHeaders.Add(
 // the application's dependencies manually.
 IMarketPriceProvider marketPriceProvider = new FinnhubMarketPriceProvider(httpClient);
 
+// We could also use the FakeMarketPriceProvider for local testing instead of the real Finnhub provider.
+// Returning 100 as a fake price for every asset.
+// IMarketPriceProvider marketPriceProvider = new FakeMarketPriceProvider();
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 Console.WriteLine("Stock Portfolio Simulator");
