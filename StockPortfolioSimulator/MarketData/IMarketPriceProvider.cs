@@ -1,4 +1,5 @@
-﻿namespace StockPortfolioSimulator.MarketData;
+﻿using StockPortfolioSimulator.Models;
+namespace StockPortfolioSimulator.MarketData;
 
 public interface IMarketPriceProvider
 {
@@ -6,9 +7,3 @@ public interface IMarketPriceProvider
 }
 
 // Just so this will compile until you have your own Asset Model
-// TODO: Delete this class
-public sealed class Asset
-{
-    string Symbol = string.Empty;
-    string Name = string.Empty;
-}

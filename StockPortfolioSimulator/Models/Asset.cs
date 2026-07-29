@@ -1,10 +1,10 @@
-namespace Stock-Portfolio-Simulator.Models;
-public class Assets
+namespace StockPortfolioSimulator.Models;
+public class Asset
 {
 	public String Symbol { get; set; }
 	public String Name { get; set; }
 
-	public Assets(string symbol, string name)
+	public Asset(string symbol, string name)
 	{
 		Symbol = symbol;
 		Name = name;
