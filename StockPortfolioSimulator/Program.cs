@@ -1,8 +1,11 @@
 ﻿using System;
-namespace Stock-Portfolio-Simulator;
+namespace StockPortfolioSimulator;
+
 class Program
 {
-    static void Main(String[] args )  
+    static void Main(String[] args)
     {
+        Console.WriteLine("Hello World again.. ");
+    }
 
-Console.Wri teLine("Hello World again.. ");
+}
