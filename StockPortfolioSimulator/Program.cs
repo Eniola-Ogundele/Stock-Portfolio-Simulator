@@ -2,8 +2,7 @@
 namespace Stock-Portfolio-Simulator;
 class Program
 {
-    static void Main(String[] args )
+    static void Main(String[] args )  
     {
 
-    }
-}
+Console.Wri teLine("Hello World again.. ");
