@@ -14,7 +14,7 @@ var options = new FinnhubOptions
 {
     // TEMPORARY LOCAL TESTING ONLY.
     // Do not commit the real key.
-    ApiKey = "YOUR_LOCAL_API_KEY"
+    ApiKey = "YOUR_LOCAL_API_KEY_BUT_ALWAYS_REMOVE_BEFORE_CHECKING_IN_TO_GIT",
 };
 
 // HttpClient is used to send requests to the Finnhub API.
