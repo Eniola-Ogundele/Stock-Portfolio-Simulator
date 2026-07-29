@@ -1,6 +1,6 @@
 ﻿/*
  * Stock-Portfolio-Simulator
- * Copyright (c) 2026 Kyle Giver
+ * Copyright (c) 2026 Kyle Givler
  * License not yet decided
  */
 
