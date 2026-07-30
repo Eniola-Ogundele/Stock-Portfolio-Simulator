@@ -19,6 +19,11 @@ public class Portfolio
         Holdings = new List<Holding>();
     }
 
+    public void AddHolding (Holding holding)
+    {
+        Holdings.Add(holding);
+    }
+
     public override string ToString()
     {
         return $"Cash Balance: ${CashBalance}, Holdings: {Holdings.Count}";
