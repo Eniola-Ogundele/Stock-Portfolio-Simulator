@@ -1,6 +1,13 @@
-﻿using StockPortfolioSimulator.Models;
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Kyle Givler
+ * License not yet decided
+ */
 
-namespace StockPortfolioSimulator.tests.Models;
+
+using StockPortfolioSimulator.Models;
+
+namespace StockPortfolioSimulator.Tests.Models;
 
 public class AssetTests
 {

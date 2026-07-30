@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="StockPortfolioSimulator.tests/StockPortfolioSimulator.tests.csproj" Id="d2eaa6b8-14bf-48bc-b365-1bd91bcb386b" />
+  <Project Path="StockPortfolioSimulator.Tests/StockPortfolioSimulator.Tests.csproj" Id="d2eaa6b8-14bf-48bc-b365-1bd91bcb386b" DisplayName="StockPortfolioSimulator.Tests" />
   <Project Path="StockPortfolioSimulator/StockPortfolioSimulator.csproj" />
 </Solution>
