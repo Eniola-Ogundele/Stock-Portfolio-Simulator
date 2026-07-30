@@ -1,8 +1,8 @@
 ﻿using StockPortfolioSimulator.Models;
 
-namespace StockPortfolioSimulator.Model;
+namespace StockPortfolioSimulator.Models;
 
-class Holding
+public class Holding
 {
 
     public Asset Asset { get; }
