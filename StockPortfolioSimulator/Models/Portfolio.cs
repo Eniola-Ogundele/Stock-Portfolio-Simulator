@@ -1,6 +1,4 @@
-﻿using StockPortfolioSimulator.Models;
-
-namespace StockPortfolioSimulator.Models;
+﻿namespace StockPortfolioSimulator.Models;
 
 
 public class Portfolio
@@ -15,9 +13,9 @@ public class Portfolio
         get;
     }
 
-    public Portfolio(decimal cashbalance)
+    public Portfolio(decimal cashBalance)
     {
-        CashBalance = cashbalance;
+        CashBalance = cashBalance;
         Holdings = new List<Holding>();
     }
 

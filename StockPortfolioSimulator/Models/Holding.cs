@@ -1,6 +1,4 @@
-﻿using StockPortfolioSimulator.Models;
-
-namespace StockPortfolioSimulator.Models;
+﻿namespace StockPortfolioSimulator.Models;
 
 public class Holding
 {
