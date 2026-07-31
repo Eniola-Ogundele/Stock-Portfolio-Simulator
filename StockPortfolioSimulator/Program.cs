@@ -1,5 +1,5 @@
 ﻿using StockPortfolioSimulator;
-using StockPortfolioSimulator.Models;
 
+// Program.cs is the application's entry point.
 ConsolePortfolioApp.Run();
 
