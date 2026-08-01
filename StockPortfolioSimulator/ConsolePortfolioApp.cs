@@ -9,23 +9,24 @@ public static class ConsolePortfolioApp {
 
         Portfolio portfolio = CreatePortfolioFromInput();
 
-        Asset asset = CreateAssetFromInput();
-
-        decimal quantity = ReadPositiveDecimal("Enter quantity to buy: ");
-        decimal purchasePrice = ReadPositiveDecimal("Enter purchase price: ");
-
-        bool purchaseSuccessful = portfolio.TryBuy(asset, quantity, purchasePrice);
-        Console.WriteLine();
-        if (purchaseSuccessful)
+        while (true)
         {
-            Console.WriteLine("Purchase successful.");
+            DisplayMenu();
+            String? choice = Console.ReadLine();
 
-            DisplayPortfolio(portfolio);
-
-        }
-        else
-        {
-            Console.WriteLine("Purchase failed: insufficient cash.");
+            if (choice == "1")
+            {
+                HandleBuy(portfolio);
+            }
+            else if (choice == "2")
+            {
+                DisplayPortfolio(portfolio);
+            }
+            else if (choice == "3")
+            {
+                Console.WriteLine("Goodbye!");
+                break;
+            }
         }
 
        }
@@ -80,6 +81,7 @@ public static class ConsolePortfolioApp {
 
             Console.WriteLine(
                 "Please enter a non-negative number.");
+            Console.WriteLine();
         }
     }
 
@@ -97,6 +99,40 @@ public static class ConsolePortfolioApp {
                 return value;
             }
             Console.WriteLine("Please enter a number greater than zero.");
+            Console.WriteLine();
+        }
+    }
+
+    public static void DisplayMenu()
+    {
+        Console.WriteLine();
+        Console.WriteLine("1. Buy an asset");
+        Console.WriteLine("2. View portfolio");
+        Console.WriteLine("3. Exit");
+        Console.WriteLine();
+
+        Console.Write("Choose an option: ");
+    }
+
+    public static void HandleBuy(Portfolio portfolio)
+    {
+        Asset asset = CreateAssetFromInput();
+
+        decimal quantity = ReadPositiveDecimal("Enter quantity to buy: ");
+        decimal purchasePrice = ReadPositiveDecimal("Enter purchase price: ");
+
+        bool purchaseSuccessful = portfolio.TryBuy(asset, quantity, purchasePrice);
+        Console.WriteLine();
+        if (purchaseSuccessful)
+        {
+            Console.WriteLine("Purchase successful.");
+
+            DisplayPortfolio(portfolio);
+
+        }
+        else
+        {
+            Console.WriteLine("Purchase failed: insufficient cash.");
         }
     }
 }
