@@ -1,32 +1,25 @@
 ﻿using StockPortfolioSimulator.Models;
 namespace StockPortfolioSimulator;
 
-//Handles all console-based user interactions for the console
 public static class ConsolePortfolioApp {
 
-    //Controls the overall flow of the application
     public static void Run()
     {
         Console.WriteLine("Stock Portfolio Simulator");
 
-        //Create a portfolio using the user's starting balance
         Portfolio portfolio = CreatePortfolioFromInput();
 
-        //Create the asset the user would like to purchase
         Asset asset = CreateAssetFromInput();
 
-        //Read the purchase information from the user
-        decimal quantity = ReadDecimal("Enter quantity to buy: ");
-        decimal purchasePrice = ReadDecimal("Enter purchase price: ");
+        decimal quantity = ReadPositiveDecimal("Enter quantity to buy: ");
+        decimal purchasePrice = ReadPositiveDecimal("Enter purchase price: ");
 
-        //Attempt to buy the asset using the Portfolio business logic
         bool purchaseSuccessful = portfolio.TryBuy(asset, quantity, purchasePrice);
         Console.WriteLine();
         if (purchaseSuccessful)
         {
             Console.WriteLine("Purchase successful.");
 
-            //Display the updated portfolio after the purchase
             DisplayPortfolio(portfolio);
 
         }
@@ -37,16 +30,14 @@ public static class ConsolePortfolioApp {
 
        }
 
-    //Prompts the user a starting cash balance and creates a portfolio
     private static Portfolio CreatePortfolioFromInput()
     {
-        decimal startingCashBalance = ReadDecimal("Enter starting cash balance: $");
+        decimal startingCashBalance = ReadNonNegativeDecimal("Enter starting cash balance: $");
         Portfolio portfolio = new Portfolio(startingCashBalance);
 
         return portfolio;
     }
 
-    //Prompts the user for stock information and creates an asset
     private static Asset CreateAssetFromInput()
     {
         Console.Write("Enter stock symbol: ");
@@ -59,13 +50,11 @@ public static class ConsolePortfolioApp {
         return asset;
     }
 
-    //Displays the portfolio and all holdings it contains
     private static void DisplayPortfolio(Portfolio portfolio)
     {
         Console.WriteLine();
         Console.WriteLine(portfolio);
 
-        //Displays each holding in the portfolio
         foreach (Holding item in portfolio.Holdings)
         {
             Console.WriteLine($"- {item}");
@@ -73,10 +62,41 @@ public static class ConsolePortfolioApp {
         Console.WriteLine();
     }
 
-    //Reads a decimal value from the console after displaying a prompt
-    private static decimal ReadDecimal(string prompt)
+    private static decimal ReadNonNegativeDecimal(string prompt)
     {
-        Console.Write(prompt);
-        return decimal.Parse(Console.ReadLine()!);
+        while (true)
+        {
+            Console.Write(prompt);
+
+            string? input = Console.ReadLine();
+
+            if (
+                decimal.TryParse(input, out decimal value)
+                && value >= 0
+            )
+            {
+                return value;
+            }
+
+            Console.WriteLine(
+                "Please enter a non-negative number.");
+        }
+    }
+
+    private static decimal ReadPositiveDecimal(string prompt)
+    {
+        while(true)
+        {
+            Console.Write(prompt);
+
+            string? input = Console.ReadLine();
+
+            if (decimal.TryParse(input, out decimal value) 
+                && value > 0)
+            {
+                return value;
+            }
+            Console.WriteLine("Please enter a number greater than zero.");
+        }
     }
 }
