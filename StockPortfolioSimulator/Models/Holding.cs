@@ -17,9 +17,18 @@ public class Holding
 
     }
 
+    public void AddPurchase(decimal quantity, decimal purchasePrice)
+    {
+        decimal existingCost = Quantity * AveragePurchasePrice;
+        decimal newCost = quantity * purchasePrice;
+        decimal totalQuantity = quantity + Quantity;
+        AveragePurchasePrice = (newCost + existingCost) / totalQuantity;
+        Quantity = totalQuantity;
+    }
+
     public override string ToString()
     {
-        return $"{Asset} | Quantity: {Quantity}";
+        return $"{Asset} | Quantity: {Quantity} | Average purchase price: ${AveragePurchasePrice}";
     }
 
 }

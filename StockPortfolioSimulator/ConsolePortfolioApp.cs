@@ -12,7 +12,7 @@ public static class ConsolePortfolioApp {
         while (true)
         {
             DisplayMenu();
-            String? choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             if (choice == "1")
             {
@@ -27,7 +27,12 @@ public static class ConsolePortfolioApp {
                 Console.WriteLine("Goodbye!");
                 break;
             }
+            else
+            {
+                Console.WriteLine("Invalid option!");
+            }
         }
+
 
        }
 
@@ -71,16 +76,12 @@ public static class ConsolePortfolioApp {
 
             string? input = Console.ReadLine();
 
-            if (
-                decimal.TryParse(input, out decimal value)
-                && value >= 0
-            )
+            if (decimal.TryParse(input, out decimal value) && value >= 0)
             {
                 return value;
             }
 
-            Console.WriteLine(
-                "Please enter a non-negative number.");
+            Console.WriteLine("Please enter a non-negative number.");
             Console.WriteLine();
         }
     }
@@ -93,8 +94,7 @@ public static class ConsolePortfolioApp {
 
             string? input = Console.ReadLine();
 
-            if (decimal.TryParse(input, out decimal value) 
-                && value > 0)
+            if (decimal.TryParse(input, out decimal value) && value > 0)
             {
                 return value;
             }
@@ -103,7 +103,7 @@ public static class ConsolePortfolioApp {
         }
     }
 
-    public static void DisplayMenu()
+    private static void DisplayMenu()
     {
         Console.WriteLine();
         Console.WriteLine("1. Buy an asset");
@@ -114,7 +114,7 @@ public static class ConsolePortfolioApp {
         Console.Write("Choose an option: ");
     }
 
-    public static void HandleBuy(Portfolio portfolio)
+    private static void HandleBuy(Portfolio portfolio)
     {
         Asset asset = CreateAssetFromInput();
 

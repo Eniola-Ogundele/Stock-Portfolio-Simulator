@@ -1,4 +1,6 @@
-﻿namespace StockPortfolioSimulator.Models;
+﻿using System;
+using System.Linq;
+namespace StockPortfolioSimulator.Models;
 
 public class Portfolio
 {
@@ -35,9 +37,18 @@ public class Portfolio
 
         CashBalance -= totalCost;
 
-        Holding holding = new Holding(asset, quantity, purchasePrice);
+        Holding? existingHolding = Holdings.FirstOrDefault(h => h.Asset.Symbol.Equals(asset.Symbol, StringComparison.OrdinalIgnoreCase));
 
-        Holdings.Add(holding);
+        if (existingHolding != null)
+        {
+            existingHolding.AddPurchase(quantity, purchasePrice);
+        }
+
+        else
+        {
+            Holding holding = new Holding(asset, quantity, purchasePrice);
+            Holdings.Add(holding);
+        }
 
         return true;
     }
