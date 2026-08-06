@@ -1,3 +1,4 @@
 ﻿using StockPortfolioSimulator;
+
 ConsolePortfolioApp.Run();
 
