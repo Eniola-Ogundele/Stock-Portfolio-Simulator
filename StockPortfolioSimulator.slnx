@@ -1,4 +1,5 @@
 <Solution>
+  <Folder Name="/Solution Items/" />
   <Project Path="StockPortfolioSimulator.tests/StockPortfolioSimulator.tests.csproj" Id="d2eaa6b8-14bf-48bc-b365-1bd91bcb386b" />
   <Project Path="StockPortfolioSimulator/StockPortfolioSimulator.csproj" />
 </Solution>

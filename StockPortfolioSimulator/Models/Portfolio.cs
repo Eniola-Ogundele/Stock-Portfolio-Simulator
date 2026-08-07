@@ -6,7 +6,8 @@ public class Portfolio
 {
     public decimal CashBalance
     {
-        get; private set;
+        get;
+        private set;
     }
 
     public List<Holding> Holdings
@@ -47,7 +48,6 @@ public class Portfolio
         {
             existingHolding.AddPurchase(quantity, purchasePrice);
         }
-
         else
         {
             Holding holding = new Holding(asset, quantity, purchasePrice);
@@ -61,7 +61,7 @@ public class Portfolio
 
     public bool TrySell(string symbol, decimal quantity, decimal salePrice)
     {
-        if (quantity <=0 || salePrice <= 0)
+        if (quantity <= 0 || salePrice <= 0)
         {
             return false;
         }

@@ -2,12 +2,22 @@
 
 public class Holding
 {
+    public Asset Asset
+    {
+        get;
+    }
 
-    public Asset Asset { get; }
+    public decimal Quantity
+    {
+        get;
+        private set;
+    }
 
-    public decimal Quantity { get; private set; }
-
-    public decimal AveragePurchasePrice { get; private set; }
+    public decimal AveragePurchasePrice
+    {
+        get;
+        private set;
+    }
 
     public Holding(Asset asset, decimal quantity, decimal averagePurchasePrice)
     {
@@ -34,5 +44,4 @@ public class Holding
     {
         return $"{Asset} | Quantity: {Quantity} | Average purchase price: ${AveragePurchasePrice:F2}";
     }
-
 }

@@ -1,8 +1,8 @@
 ﻿using StockPortfolioSimulator.Models;
 namespace StockPortfolioSimulator;
 
-public static class ConsolePortfolioApp {
-
+public static class ConsolePortfolioApp
+{
     public static void Run()
     {
         Console.WriteLine("Stock Portfolio Simulator");
@@ -13,38 +13,34 @@ public static class ConsolePortfolioApp {
             DisplayMenu();
             string? choice = Console.ReadLine();
 
-            if (choice == "1")
+            switch (choice)
             {
-                HandleBuy(portfolio);
-            }
+                case "1":
+                    HandleBuy(portfolio);
+                    break;
 
-            else if (choice == "2")
-            {
-                HandleSell(portfolio);
-            }
+                case "2":
+                    HandleSell(portfolio);
+                    break;
 
-            else if (choice == "3")
-            {
-                DisplayPortfolio(portfolio);
-            }
+                case "3":
+                    DisplayPortfolio(portfolio);
+                    break;
 
-            else if (choice == "4")
-            {
-                DisplayTransactionHistory(portfolio);
-            }
+                case "4":
+                    DisplayTransactionHistory(portfolio);
+                    break;
 
-            else if (choice == "5")
-            {
-                Console.WriteLine("Goodbye!");
-                break;
-            }
+                case "5":
+                    Console.WriteLine("Goodbye!");
+                    return;
 
-            else
-            {
-                Console.WriteLine("Invalid option!");
+                default:
+                    Console.WriteLine("Invalid option!");
+                    break;
             }
         }
-       }
+    }
 
     private static Portfolio CreatePortfolioFromInput()
     {
@@ -68,9 +64,9 @@ public static class ConsolePortfolioApp {
         Console.WriteLine();
         Console.WriteLine(portfolio);
 
-        foreach (Holding item in portfolio.Holdings)
+        foreach (Holding holding in portfolio.Holdings)
         {
-            Console.WriteLine($"- {item}");
+            Console.WriteLine($"- {holding}");
         }
 
         Console.WriteLine();
@@ -78,7 +74,6 @@ public static class ConsolePortfolioApp {
 
     private static decimal ReadNonNegativeDecimal(string prompt)
     {
-
         while (true)
         {
             Console.Write(prompt);
@@ -96,7 +91,7 @@ public static class ConsolePortfolioApp {
 
     private static decimal ReadPositiveDecimal(string prompt)
     {
-        while(true)
+        while (true)
         {
             Console.Write(prompt);
             string? input = Console.ReadLine();
@@ -136,7 +131,6 @@ public static class ConsolePortfolioApp {
             Console.WriteLine("Purchase successful!");
             DisplayPortfolio(portfolio);
         }
-
         else
         {
             Console.WriteLine("Purchase failed: insufficient cash.");
@@ -181,7 +175,7 @@ public static class ConsolePortfolioApp {
 
         if (portfolio.Transactions.Count == 0)
         {
-            Console.WriteLine("No transactions have been recording yet.");
+            Console.WriteLine("No transaction has been recorded yet.");
             return;
         }
 
