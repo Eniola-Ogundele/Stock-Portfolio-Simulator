@@ -94,6 +94,6 @@ public class Portfolio
 
     public override string ToString()
     {
-        return $"Cash Balance: ${CashBalance}, Holdings: {Holdings.Count}";
+        return $"Cash Balance: ${CashBalance:F2}, Holdings: {Holdings.Count}";
     }
 }

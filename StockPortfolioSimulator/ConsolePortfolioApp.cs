@@ -175,7 +175,7 @@ public static class ConsolePortfolioApp
 
         if (portfolio.Transactions.Count == 0)
         {
-            Console.WriteLine("No transaction has been recorded yet.");
+            Console.WriteLine("No transactions have been recorded yet.");
             return;
         }
 
