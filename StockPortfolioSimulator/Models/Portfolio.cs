@@ -4,27 +4,20 @@ namespace StockPortfolioSimulator.Models;
 
 public class Portfolio
 {
+    private readonly List<Holding> _holdings = new();
+    private readonly List<Transaction> _transactions = new();
+    public IReadOnlyList<Holding> Holdings => _holdings;
+    public IReadOnlyList<Transaction> Transactions => _transactions;
+
     public decimal CashBalance
     {
         get;
         private set;
     }
 
-    public List<Holding> Holdings
-    {
-        get;
-    }
-
-    public List<Transaction> Transactions
-    {
-        get;
-    }
-
     public Portfolio(decimal cashBalance)
     {
         CashBalance = cashBalance;
-        Holdings = new List<Holding>();
-        Transactions = new List<Transaction>();
     }
 
     public bool TryBuy(Asset asset, decimal quantity, decimal purchasePrice)
@@ -51,11 +44,11 @@ public class Portfolio
         else
         {
             Holding holding = new Holding(asset, quantity, purchasePrice);
-            Holdings.Add(holding);
+            _holdings.Add(holding);
         }
 
         Transaction transaction = new Transaction(asset, TransactionType.Buy, quantity, purchasePrice);
-        Transactions.Add(transaction);
+        _transactions.Add(transaction);
         return true;
     }
 
@@ -84,11 +77,11 @@ public class Portfolio
 
         if (existingHolding.Quantity == 0)
         {
-            Holdings.Remove(existingHolding);
+            _holdings.Remove(existingHolding);
         }
 
         Transaction transaction = new Transaction(existingHolding.Asset, TransactionType.Sell, quantity, salePrice);
-        Transactions.Add(transaction);
+        _transactions.Add(transaction);
         return true;
     }
 
