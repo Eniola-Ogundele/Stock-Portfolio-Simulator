@@ -123,19 +123,28 @@ public static class ConsolePortfolioApp
         Asset asset = CreateAssetFromInput();
         decimal quantity = ReadPositiveDecimal("Enter quantity to buy: ");
         decimal purchasePrice = ReadPositiveDecimal("Enter purchase price: ");
-        bool purchaseSuccessful = portfolio.TryBuy(asset, quantity, purchasePrice);
+        TradeResult result = portfolio.TryBuy(asset, quantity, purchasePrice);
         Console.WriteLine();
 
-        if (purchaseSuccessful)
+        switch(result)
         {
-            Console.WriteLine("Purchase successful!");
-            DisplayPortfolio(portfolio);
-        }
-        else
-        {
-            Console.WriteLine("Purchase failed: insufficient cash.");
-        }
+            case TradeResult.Success:
+                Console.WriteLine("Purchase successful!");
+                DisplayPortfolio(portfolio);
+                break;
 
+            case TradeResult.InvalidQuantity:
+                Console.WriteLine("Purchase failed: invalid quantity.");
+                break;
+
+            case TradeResult.InvalidPrice:
+                Console.WriteLine("Purchase failed: invalid price.");
+                break;
+
+            case TradeResult.InsufficientCash:
+                Console.WriteLine("Purchase failed: insufficient cash.");
+                break;
+        }
     }
 
     private static void HandleSell(Portfolio portfolio)
@@ -146,18 +155,31 @@ public static class ConsolePortfolioApp
         decimal quantity = ReadPositiveDecimal("Enter quantity to sell: ");
         decimal salePrice = ReadPositiveDecimal("Enter sale price: ");
 
-        bool saleSuccessful = portfolio.TrySell(symbol, quantity, salePrice);
+        TradeResult result = portfolio.TrySell(symbol, quantity, salePrice);
         Console.WriteLine();
 
-        if (saleSuccessful)
+        switch (result)
         {
-            Console.WriteLine("Sale successful!");
-            DisplayPortfolio(portfolio);
-        }
+            case TradeResult.Success:
+                Console.WriteLine("Sale successful!");
+                DisplayPortfolio(portfolio);
+                break;
 
-        else
-        {
-            Console.WriteLine("Sale failed");
+            case TradeResult.InvalidQuantity:
+                Console.WriteLine("Sale failed: invalid quantity.");
+                break;
+
+            case TradeResult.InvalidPrice:
+                Console.WriteLine("Sale failed: invalid price.");
+                break;
+
+            case TradeResult.AssetNotFound:
+                Console.WriteLine("Sale failed: asset not found.");
+                break;
+
+            case TradeResult.InsufficientShares:
+                Console.WriteLine("Sale failed: insufficient shares.");
+                break;
         }
     }
 

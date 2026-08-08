@@ -20,24 +20,26 @@ public class Portfolio
         CashBalance = cashBalance;
     }
 
-    public bool TryBuy(Asset asset, decimal quantity, decimal purchasePrice)
+    public TradeResult TryBuy(Asset asset, decimal quantity, decimal purchasePrice)
     {
-        if (quantity <= 0 || purchasePrice <= 0)
+        if (quantity <= 0)
         {
-            return false;
+            return TradeResult.InvalidQuantity;
+        }
+
+        if(purchasePrice <= 0)
+        {
+            return TradeResult.InvalidPrice;
         }
 
         decimal totalCost = quantity * purchasePrice;
 
         if (totalCost > CashBalance)
         {
-            return false;
+            return TradeResult.InsufficientCash;
         }
 
-        Holding? existingHolding = Holdings.FirstOrDefault(
-    h => h.Asset.Symbol.Equals(
-        asset.Symbol,
-        StringComparison.OrdinalIgnoreCase));
+        Holding? existingHolding = Holdings.FirstOrDefault(h => h.Asset.Symbol.Equals(asset.Symbol,StringComparison.OrdinalIgnoreCase));
 
         CashBalance -= totalCost;
 
@@ -58,26 +60,31 @@ public class Portfolio
         purchasePrice);
 
         _transactions.Add(transaction);
-        return true;
+        return TradeResult.Success;
     }
 
-    public bool TrySell(string symbol, decimal quantity, decimal salePrice)
+    public TradeResult TrySell(string symbol, decimal quantity, decimal salePrice)
     {
-        if (quantity <= 0 || salePrice <= 0)
+        if (quantity <= 0)
         {
-            return false;
+            return TradeResult.InvalidQuantity;
+        }
+
+        if (salePrice <= 0)
+        {
+            return TradeResult.InvalidPrice;
         }
 
         Holding? existingHolding = Holdings.FirstOrDefault(h => h.Asset.Symbol.Equals(symbol, StringComparison.OrdinalIgnoreCase));
 
         if (existingHolding == null)
         {
-            return false;
+            return TradeResult.AssetNotFound;
         }
 
         if (quantity > existingHolding.Quantity)
         {
-            return false;
+            return TradeResult.InsufficientShares;
         }
 
         decimal proceeds = quantity * salePrice;
@@ -91,7 +98,7 @@ public class Portfolio
 
         Transaction transaction = new Transaction(existingHolding.Asset, TransactionType.Sell, quantity, salePrice);
         _transactions.Add(transaction);
-        return true;
+        return TradeResult.Success;
     }
 
     public override string ToString()
