@@ -53,6 +53,13 @@ public static class ConsolePortfolioApp
     {
         Console.Write("Enter stock symbol: ");
         string symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
+
+        while (string.IsNullOrWhiteSpace(symbol))
+        {
+            Console.Write("Stock symbol cannot be blank. Enter stock symbol: ");
+            symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
+        }
+
         Console.Write("Enter company name: ");
         string name = Console.ReadLine()!.Trim();
         Asset asset = new Asset(symbol, name);
@@ -126,7 +133,7 @@ public static class ConsolePortfolioApp
         TradeResult result = portfolio.TryBuy(asset, quantity, purchasePrice);
         Console.WriteLine();
 
-        switch(result)
+        switch (result)
         {
             case TradeResult.Success:
                 Console.WriteLine("Purchase successful!");

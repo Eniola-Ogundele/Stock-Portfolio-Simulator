@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 namespace StockPortfolioSimulator.Models;
 
 public class Portfolio
@@ -22,12 +21,17 @@ public class Portfolio
 
     public TradeResult TryBuy(Asset asset, decimal quantity, decimal purchasePrice)
     {
+        if (string.IsNullOrWhiteSpace(asset.Symbol))
+        {
+            return TradeResult.AssetNotFound;
+        }
+
         if (quantity <= 0)
         {
             return TradeResult.InvalidQuantity;
         }
 
-        if(purchasePrice <= 0)
+        if (purchasePrice <= 0)
         {
             return TradeResult.InvalidPrice;
         }

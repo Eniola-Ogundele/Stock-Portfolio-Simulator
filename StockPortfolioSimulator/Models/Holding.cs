@@ -38,12 +38,12 @@ public class Holding
 
     public void AddPurchase(decimal quantity, decimal purchasePrice)
     {
-        if(quantity <= 0)
+        if (quantity <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(quantity));
         }
 
-        if(purchasePrice <= 0)
+        if (purchasePrice <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(purchasePrice));
         }
@@ -57,12 +57,12 @@ public class Holding
 
     public void RemoveQuantity(decimal quantity)
     {
-        if(quantity <= 0)
+        if (quantity <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(quantity));
         }
 
-        if(quantity > Quantity)
+        if (quantity > Quantity)
         {
             throw new InvalidOperationException("Not enough shares.");
         }
