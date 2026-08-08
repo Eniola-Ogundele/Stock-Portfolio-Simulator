@@ -34,8 +34,12 @@ public class Portfolio
             return false;
         }
 
+        Holding? existingHolding = Holdings.FirstOrDefault(
+    h => h.Asset.Symbol.Equals(
+        asset.Symbol,
+        StringComparison.OrdinalIgnoreCase));
+
         CashBalance -= totalCost;
-        Holding? existingHolding = Holdings.FirstOrDefault(h => h.Asset.Symbol.Equals(asset.Symbol, StringComparison.OrdinalIgnoreCase));
 
         if (existingHolding != null)
         {
@@ -47,7 +51,12 @@ public class Portfolio
             _holdings.Add(holding);
         }
 
-        Transaction transaction = new Transaction(asset, TransactionType.Buy, quantity, purchasePrice);
+        Transaction transaction = new Transaction(
+        existingHolding?.Asset ?? asset,
+        TransactionType.Buy,
+        quantity,
+        purchasePrice);
+
         _transactions.Add(transaction);
         return true;
     }

@@ -64,7 +64,7 @@ public class Holding
 
         if(quantity > Quantity)
         {
-            throw new InvalidOperationException("Not enough shares...");
+            throw new InvalidOperationException("Not enough shares.");
         }
 
         Quantity -= quantity;

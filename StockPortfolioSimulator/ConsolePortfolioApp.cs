@@ -52,9 +52,9 @@ public static class ConsolePortfolioApp
     private static Asset CreateAssetFromInput()
     {
         Console.Write("Enter stock symbol: ");
-        string symbol = Console.ReadLine()!;
+        string symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
         Console.Write("Enter company name: ");
-        string name = Console.ReadLine()!;
+        string name = Console.ReadLine()!.Trim();
         Asset asset = new Asset(symbol, name);
         return asset;
     }
@@ -141,31 +141,23 @@ public static class ConsolePortfolioApp
     private static void HandleSell(Portfolio portfolio)
     {
         Console.Write("Enter stock symbol: ");
-        string symbol = Console.ReadLine()!;
-        Holding? holding = portfolio.Holdings.FirstOrDefault(h => h.Asset.Symbol.Equals(symbol, StringComparison.OrdinalIgnoreCase));
-
-        if (holding == null)
-        {
-            Console.WriteLine("Sale failed: Asset not found.");
-            return;
-        }
+        string symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
 
         decimal quantity = ReadPositiveDecimal("Enter quantity to sell: ");
         decimal salePrice = ReadPositiveDecimal("Enter sale price: ");
-
-        if (quantity > holding.Quantity)
-        {
-            Console.WriteLine("Sale failed: insufficient shares.");
-            return;
-        }
 
         bool saleSuccessful = portfolio.TrySell(symbol, quantity, salePrice);
         Console.WriteLine();
 
         if (saleSuccessful)
         {
-            Console.WriteLine("Sale Successful!");
+            Console.WriteLine("Sale successful!");
             DisplayPortfolio(portfolio);
+        }
+
+        else
+        {
+            Console.WriteLine("Sale failed");
         }
     }
 
