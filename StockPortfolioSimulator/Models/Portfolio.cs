@@ -16,6 +16,11 @@ public class Portfolio
 
     public Portfolio(decimal cashBalance)
     {
+        if (cashBalance < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(cashBalance));
+        }
+
         CashBalance = cashBalance;
     }
 

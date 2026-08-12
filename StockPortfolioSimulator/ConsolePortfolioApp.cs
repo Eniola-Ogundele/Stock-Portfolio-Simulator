@@ -151,6 +151,10 @@ public static class ConsolePortfolioApp
             case TradeResult.InsufficientCash:
                 Console.WriteLine("Purchase failed: insufficient cash.");
                 break;
+
+            case TradeResult.AssetNotFound:
+                Console.WriteLine("Purchase failed: invalid asset.");
+                break;
         }
     }
 
