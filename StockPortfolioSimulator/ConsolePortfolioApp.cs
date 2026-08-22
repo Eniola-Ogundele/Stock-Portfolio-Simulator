@@ -1,9 +1,10 @@
 ﻿using StockPortfolioSimulator.Models;
+using StockPortfolioSimulator.Persistence;
 namespace StockPortfolioSimulator;
 
 public static class ConsolePortfolioApp
 {
-    public static void Run()
+    public static async Task Run(SqlitePortfolioRepository repository)
     {
         Console.WriteLine("Stock Portfolio Simulator");
         Portfolio portfolio = CreatePortfolioFromInput();
@@ -32,6 +33,8 @@ public static class ConsolePortfolioApp
                     break;
 
                 case "5":
+                    await repository.SaveAsync(portfolio);
+                    Console.WriteLine("Portfolio saved.");
                     Console.WriteLine("Goodbye!");
                     return;
 

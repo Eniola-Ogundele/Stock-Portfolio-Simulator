@@ -5,4 +5,4 @@ SqlitePortfolioRepository repository = new SqlitePortfolioRepository("Data Sourc
 
 await repository.InitializeAsync();
 
-ConsolePortfolioApp.Run();
+await ConsolePortfolioApp.Run(repository);
