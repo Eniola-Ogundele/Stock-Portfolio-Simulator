@@ -38,6 +38,15 @@ public class Transaction
         Timestamp = DateTime.Now;
     }
 
+    internal Transaction(Asset asset, TransactionType type, decimal quantity, decimal price, DateTime timestamp)
+    {
+        Asset = asset;
+        Type = type;
+        Quantity = quantity;
+        Price = price;
+        Timestamp = timestamp;
+    }
+
     public override string ToString()
     {
         return $"{Timestamp} | {Type} | {Asset.Symbol} | Quantity: {Quantity} | Price: ${Price:F2} | Total: ${Total:F2}";

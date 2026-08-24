@@ -7,7 +7,16 @@ public static class ConsolePortfolioApp
     public static async Task Run(SqlitePortfolioRepository repository)
     {
         Console.WriteLine("Stock Portfolio Simulator");
-        Portfolio portfolio = CreatePortfolioFromInput();
+        Portfolio? portfolio = await repository.LoadAsync();
+
+        if (portfolio == null)
+        {
+            portfolio = CreatePortfolioFromInput();
+        }
+        else
+        {
+            Console.WriteLine("Saved portfolio loaded.");
+        }
 
         while (true)
         {

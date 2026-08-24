@@ -24,6 +24,15 @@ public class Portfolio
         CashBalance = cashBalance;
     }
 
+    internal static Portfolio Restore(decimal CashBalance, IEnumerable<Holding> holdings, IEnumerable<Transaction> transactions)
+    {
+        Portfolio portfolio = new Portfolio(CashBalance);
+        portfolio._holdings.AddRange(holdings);
+        portfolio._transactions.AddRange(transactions);
+
+        return portfolio;
+    }
+
     public TradeResult TryBuy(Asset asset, decimal quantity, decimal purchasePrice)
     {
         if (string.IsNullOrWhiteSpace(asset.Symbol))
