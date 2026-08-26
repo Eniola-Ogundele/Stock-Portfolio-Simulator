@@ -1,5 +1,4 @@
-﻿using System.Linq;
-namespace StockPortfolioSimulator.Models;
+﻿namespace StockPortfolioSimulator.Models;
 
 public class Portfolio
 {
@@ -24,9 +23,9 @@ public class Portfolio
         CashBalance = cashBalance;
     }
 
-    internal static Portfolio Restore(decimal CashBalance, IEnumerable<Holding> holdings, IEnumerable<Transaction> transactions)
+    internal static Portfolio Restore(decimal cashBalance, IEnumerable<Holding> holdings, IEnumerable<Transaction> transactions)
     {
-        Portfolio portfolio = new Portfolio(CashBalance);
+        Portfolio portfolio = new Portfolio(cashBalance);
         portfolio._holdings.AddRange(holdings);
         portfolio._transactions.AddRange(transactions);
 

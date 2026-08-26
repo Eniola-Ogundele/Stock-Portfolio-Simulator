@@ -1,10 +1,13 @@
 ﻿using StockPortfolioSimulator.Models;
 using StockPortfolioSimulator.Persistence;
+using StockPortfolioSimulator.MarketData;
+using StockPortfolioSimulator.Performance;
+
 namespace StockPortfolioSimulator;
 
 public static class ConsolePortfolioApp
 {
-    public static async Task Run(SqlitePortfolioRepository repository)
+    public static async Task Run(SqlitePortfolioRepository repository, IMarketPriceProvider marketPriceProvider)
     {
         Console.WriteLine("Stock Portfolio Simulator");
         Portfolio? portfolio = await repository.LoadAsync();
@@ -42,6 +45,10 @@ public static class ConsolePortfolioApp
                     break;
 
                 case "5":
+                    await DisplayPortfolioPerformance(portfolio, marketPriceProvider);
+                    break;
+
+                case "6":
                     await repository.SaveAsync(portfolio);
                     Console.WriteLine("Portfolio saved.");
                     Console.WriteLine("Goodbye!");
@@ -132,7 +139,8 @@ public static class ConsolePortfolioApp
         Console.WriteLine("2. Sell an asset");
         Console.WriteLine("3. View portfolio");
         Console.WriteLine("4. View transaction history");
-        Console.WriteLine("5. Exit");
+        Console.WriteLine("5. View portfolio performance");
+        Console.WriteLine("6. Exit");
         Console.WriteLine();
         Console.Write("Choose an option: ");
     }
@@ -220,5 +228,38 @@ public static class ConsolePortfolioApp
         {
             Console.WriteLine(transaction);
         }
+    }
+
+    private static async Task DisplayPortfolioPerformance(
+    Portfolio portfolio,
+    IMarketPriceProvider marketPriceProvider)
+    {
+        PortfolioPerformanceCalculator calculator = new PortfolioPerformanceCalculator(marketPriceProvider);
+
+        PortfolioPerformance performance = await calculator.CalculateAsync(portfolio);
+
+        Console.WriteLine();
+        Console.WriteLine("Portfolio Performance");
+        Console.WriteLine();
+        Console.WriteLine($"Cash: ${portfolio.CashBalance:F2}");
+
+        foreach (HoldingPerformance holdingPerformance in performance.Holdings)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"{holdingPerformance.Holding.Asset.Symbol}");
+            Console.WriteLine( $"Quantity: {holdingPerformance.Holding.Quantity}");
+            Console.WriteLine($"Average purchase price: " +$"${holdingPerformance.Holding.AveragePurchasePrice:F2}");
+            Console.WriteLine($"Current price: " + $"${holdingPerformance.CurrentPrice:F2}");
+            Console.WriteLine($"Cost basis: " + $"${holdingPerformance.CostBasis:F2}");
+            Console.WriteLine($"Current value: " + $"${holdingPerformance.CurrentValue:F2}");
+            Console.WriteLine($"Unrealized P/L: " + $"{holdingPerformance.UnrealizedProfitLoss:+$0.00;-$0.00;$0.00}");
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"Holdings value: ${performance.HoldingsValue:F2}");
+        Console.WriteLine($"Total portfolio value: " +$"${performance.TotalPortfolioValue:F2}");
+        Console.WriteLine($"Total unrealized P/L: " + $"{performance.TotalUnrealizedProfitLoss:+$0.00;-$0.00;$0.00}");
+        Console.WriteLine($"Total P/L: " + $"{performance.TotalProfitLoss:+$0.00;-$0.00;$0.00}");
+        Console.WriteLine();
     }
 }

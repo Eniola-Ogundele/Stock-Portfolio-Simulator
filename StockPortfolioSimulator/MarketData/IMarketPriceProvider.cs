@@ -4,5 +4,5 @@ namespace StockPortfolioSimulator.MarketData;
 
 public interface IMarketPriceProvider
 {
-    decimal GetCurrentPrice(Asset asset);
+    Task<decimal> GetCurrentPrice(Asset asset);
 }
