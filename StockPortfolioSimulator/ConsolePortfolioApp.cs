@@ -29,11 +29,11 @@ public static class ConsolePortfolioApp
             switch (choice)
             {
                 case "1":
-                    HandleBuy(portfolio);
+                    await HandleBuy(portfolio, repository);
                     break;
 
                 case "2":
-                    HandleSell(portfolio);
+                    await HandleSell(portfolio, repository);
                     break;
 
                 case "3":
@@ -145,7 +145,7 @@ public static class ConsolePortfolioApp
         Console.Write("Choose an option: ");
     }
 
-    private static void HandleBuy(Portfolio portfolio)
+    private static async Task HandleBuy(Portfolio portfolio, SqlitePortfolioRepository repository)
     {
         Asset asset = CreateAssetFromInput();
         decimal quantity = ReadPositiveDecimal("Enter quantity to buy: ");
@@ -156,6 +156,7 @@ public static class ConsolePortfolioApp
         switch (result)
         {
             case TradeResult.Success:
+                await repository.SaveAsync(portfolio);
                 Console.WriteLine("Purchase successful!");
                 DisplayPortfolio(portfolio);
                 break;
@@ -178,7 +179,7 @@ public static class ConsolePortfolioApp
         }
     }
 
-    private static void HandleSell(Portfolio portfolio)
+    private static async Task HandleSell(Portfolio portfolio, SqlitePortfolioRepository repository)
     {
         Console.Write("Enter stock symbol: ");
         string symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
@@ -192,6 +193,7 @@ public static class ConsolePortfolioApp
         switch (result)
         {
             case TradeResult.Success:
+                await repository.SaveAsync(portfolio);
                 Console.WriteLine("Sale successful!");
                 DisplayPortfolio(portfolio);
                 break;
