@@ -29,11 +29,11 @@ public static class ConsolePortfolioApp
             switch (choice)
             {
                 case "1":
-                    await HandleBuy(portfolio, repository);
+                    await HandleBuy(portfolio, repository, marketPriceProvider);
                     break;
 
                 case "2":
-                    await HandleSell(portfolio, repository);
+                    await HandleSell(portfolio, repository, marketPriceProvider);
                     break;
 
                 case "3":
@@ -145,12 +145,27 @@ public static class ConsolePortfolioApp
         Console.Write("Choose an option: ");
     }
 
-    private static async Task HandleBuy(Portfolio portfolio, SqlitePortfolioRepository repository)
+    private static async Task HandleBuy(Portfolio portfolio, SqlitePortfolioRepository repository, IMarketPriceProvider marketPriceProvider)
     {
         Asset asset = CreateAssetFromInput();
         decimal quantity = ReadPositiveDecimal("Enter quantity to buy: ");
-        decimal purchasePrice = ReadPositiveDecimal("Enter purchase price: ");
-        TradeResult result = portfolio.TryBuy(asset, quantity, purchasePrice);
+        decimal currentPrice;
+
+        try
+        {
+            currentPrice = await marketPriceProvider.GetCurrentPrice(asset);
+        }
+
+        catch(Exception)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Unable to retrieve the current market price. Please try again later");
+            Console.WriteLine();
+            return;
+        }
+
+        Console.WriteLine($"Current {asset.Symbol} price: ${currentPrice:F2}");
+        TradeResult result = portfolio.TryBuy(asset, quantity, currentPrice);
         Console.WriteLine();
 
         switch (result)
@@ -179,15 +194,38 @@ public static class ConsolePortfolioApp
         }
     }
 
-    private static async Task HandleSell(Portfolio portfolio, SqlitePortfolioRepository repository)
+    private static async Task HandleSell(Portfolio portfolio, SqlitePortfolioRepository repository, IMarketPriceProvider marketPriceProvider)
     {
         Console.Write("Enter stock symbol: ");
         string symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
 
-        decimal quantity = ReadPositiveDecimal("Enter quantity to sell: ");
-        decimal salePrice = ReadPositiveDecimal("Enter sale price: ");
+        while(string.IsNullOrWhiteSpace(symbol))
+        {
+            Console.WriteLine("Stock symbol cannot be blank. Enter stock symbol: ");
+            symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
+        }
 
-        TradeResult result = portfolio.TrySell(symbol, quantity, salePrice);
+        decimal quantity = ReadPositiveDecimal("Enter quantity to sell: ");
+
+        Asset asset = new Asset(symbol, "");
+
+        decimal currentPrice;
+
+        try
+        {
+            currentPrice = await marketPriceProvider.GetCurrentPrice(asset);
+        }
+
+        catch (Exception)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Unable to retrieve the current market price. Please try again later.");
+            Console.WriteLine();
+            return;
+        }
+
+        Console.WriteLine($"Current {symbol} price: ${currentPrice:F2}");
+        TradeResult result = portfolio.TrySell(symbol, quantity, currentPrice);
         Console.WriteLine();
 
         switch (result)
