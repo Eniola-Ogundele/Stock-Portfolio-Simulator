@@ -1,4 +1,10 @@
-﻿using StockPortfolioSimulator.Models;
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Eniola Ogundele and Kyle Givler
+ * License not yet decided
+ */
+
+using StockPortfolioSimulator.Models;
 namespace StockPortfolioSimulator.Performance;
 
 public class HoldingPerformance
@@ -9,7 +15,7 @@ public class HoldingPerformance
     public decimal CurrentValue { get; }
     public decimal UnrealizedProfitLoss { get; }
 
-    public HoldingPerformance (Holding holding, decimal currentPrice, decimal costBasis, decimal currentValue, decimal unrealizedProfitLoss )
+    public HoldingPerformance(Holding holding, decimal currentPrice, decimal costBasis, decimal currentValue, decimal unrealizedProfitLoss)
     {
         Holding = holding;
         CurrentPrice = currentPrice;

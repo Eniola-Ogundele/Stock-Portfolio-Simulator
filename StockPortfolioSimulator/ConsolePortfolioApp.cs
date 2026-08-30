@@ -1,4 +1,10 @@
-﻿using StockPortfolioSimulator.Models;
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Eniola Ogundele and Kyle Givler
+ * License not yet decided
+ */
+
+using StockPortfolioSimulator.Models;
 using StockPortfolioSimulator.Persistence;
 using StockPortfolioSimulator.MarketData;
 using StockPortfolioSimulator.Performance;
@@ -156,7 +162,7 @@ public static class ConsolePortfolioApp
             currentPrice = await marketPriceProvider.GetCurrentPrice(asset);
         }
 
-        catch(Exception)
+        catch (Exception)
         {
             Console.WriteLine();
             Console.WriteLine("Unable to retrieve the current market price. Please try again later");
@@ -199,7 +205,7 @@ public static class ConsolePortfolioApp
         Console.Write("Enter stock symbol: ");
         string symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
 
-        while(string.IsNullOrWhiteSpace(symbol))
+        while (string.IsNullOrWhiteSpace(symbol))
         {
             Console.WriteLine("Stock symbol cannot be blank. Enter stock symbol: ");
             symbol = Console.ReadLine()!.Trim().ToUpperInvariant();
@@ -277,44 +283,30 @@ public static class ConsolePortfolioApp
         try
         {
             PortfolioPerformanceCalculator calculator = new PortfolioPerformanceCalculator(marketPriceProvider);
-
             PortfolioPerformance performance = await calculator.CalculateAsync(portfolio);
 
             Console.WriteLine();
             Console.WriteLine("Portfolio Performance");
             Console.WriteLine();
-
             Console.WriteLine($"Cash: ${portfolio.CashBalance:F2}");
 
             foreach (HoldingPerformance holdingPerformance in performance.Holdings)
             {
                 Console.WriteLine();
-
                 Console.WriteLine($"{holdingPerformance.Holding.Asset.Symbol}");
-
                 Console.WriteLine($"Quantity: {holdingPerformance.Holding.Quantity}");
-
-                Console.WriteLine($"Average purchase price: " +$"${holdingPerformance.Holding.AveragePurchasePrice:F2}");
-
-                Console.WriteLine($"Current price: " +$"${holdingPerformance.CurrentPrice:F2}");
-
-                Console.WriteLine($"Cost basis: " + $"${holdingPerformance.CostBasis:F2}");
-
-                Console.WriteLine($"Current value: " + $"${holdingPerformance.CurrentValue:F2}");
-
-                Console.WriteLine($"Unrealized P/L: " + $"{holdingPerformance.UnrealizedProfitLoss:+$0.00;-$0.00;$0.00}");
+                Console.WriteLine($"Average purchase price: ${holdingPerformance.Holding.AveragePurchasePrice:F2}");
+                Console.WriteLine($"Current price: ${holdingPerformance.CurrentPrice:F2}");
+                Console.WriteLine($"Cost basis: ${holdingPerformance.CostBasis:F2}");
+                Console.WriteLine($"Current value: ${holdingPerformance.CurrentValue:F2}");
+                Console.WriteLine($"Unrealized P/L: {holdingPerformance.UnrealizedProfitLoss:+$0.00;-$0.00;$0.00}");
             }
 
             Console.WriteLine();
-
             Console.WriteLine($"Holdings value: ${performance.HoldingsValue:F2}");
-
-            Console.WriteLine($"Total portfolio value: " + $"${performance.TotalPortfolioValue:F2}");
-
-            Console.WriteLine($"Total unrealized P/L: " + $"{performance.TotalUnrealizedProfitLoss:+$0.00;-$0.00;$0.00}");
-
-            Console.WriteLine($"Total P/L: " + $"{performance.TotalProfitLoss:+$0.00;-$0.00;$0.00}");
-
+            Console.WriteLine($"Total portfolio value: ${performance.TotalPortfolioValue:F2}");
+            Console.WriteLine($"Total unrealized P/L: {performance.TotalUnrealizedProfitLoss:+$0.00;-$0.00;$0.00}");
+            Console.WriteLine($"Total P/L: {performance.TotalProfitLoss:+$0.00;-$0.00;$0.00}");
             Console.WriteLine();
         }
         catch (Exception)

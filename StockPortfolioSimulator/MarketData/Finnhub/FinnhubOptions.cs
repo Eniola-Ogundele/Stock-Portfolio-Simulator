@@ -4,8 +4,6 @@
 * License not yet decided
 */
 
-// Note: IOptions<FinnhubOptions> has not been wired up yet.
-
 namespace StockPortfolioSimulator.MarketData.Finnhub;
 
 public class FinnhubOptions

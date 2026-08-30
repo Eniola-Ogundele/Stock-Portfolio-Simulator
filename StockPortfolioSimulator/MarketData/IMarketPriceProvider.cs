@@ -1,4 +1,10 @@
-﻿using StockPortfolioSimulator.Models;
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Eniola Ogundele and Kyle Givler
+ * License not yet decided
+ */
+
+using StockPortfolioSimulator.Models;
 
 namespace StockPortfolioSimulator.MarketData;
 

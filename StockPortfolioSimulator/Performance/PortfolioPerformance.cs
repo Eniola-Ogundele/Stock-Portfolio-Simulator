@@ -1,4 +1,10 @@
-﻿namespace StockPortfolioSimulator.Performance;
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Eniola Ogundele and Kyle Givler
+ * License not yet decided
+ */
+
+namespace StockPortfolioSimulator.Performance;
 
 public class PortfolioPerformance
 {

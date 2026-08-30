@@ -1,4 +1,10 @@
-﻿using Dapper;
+﻿/*
+ * Stock-Portfolio-Simulator
+ * Copyright (c) 2026 Eniola Ogundele and Kyle Givler
+ * License not yet decided
+ */
+
+using Dapper;
 using Microsoft.Data.Sqlite;
 using StockPortfolioSimulator.Models;
 
